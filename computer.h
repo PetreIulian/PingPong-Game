@@ -9,6 +9,15 @@
 
 class Computer: public Player {
 public:
+
+    Computer() {
+        x = screenWidth -35;
+        y = screenHeight / 2 - 60;
+        width = 25;
+        height = 120;
+        velocity = 6;
+    }
+
     void ComputerMove(int ball_y) {
         if (y + height / 2 > ball_y) {
             y -= velocity;

@@ -25,24 +25,6 @@ int main(void)
     InitWindow(screenWidth, screenHeight, "PingPong");
     SetTargetFPS(60);
 
-    ball.x = screenWidth / 2;
-    ball.y = screenHeight / 2;
-    ball.velocity_x = 7;
-    ball.velocity_y = 7;
-    ball.radius = 20;
-
-    player.x = 10;
-    player.y = screenHeight / 2  - 60;
-    player.width = 25;
-    player.height = 120;
-    player.velocity = 6;
-
-    computer.x = screenWidth -35;
-    computer.y = screenHeight / 2 - 60;
-    computer.width = 25;
-    computer.height = 120;
-    computer.velocity = 6;
-
     while (!WindowShouldClose())
     {
         BeginDrawing();

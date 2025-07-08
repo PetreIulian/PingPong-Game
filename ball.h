@@ -7,6 +7,9 @@
 #ifndef BALL_H
 #define BALL_H
 
+const int screenWidth = 1280;
+const int screenHeight = 800;
+
 Color Orange = Color{255,165,0, 254};
 
 class Ball {
@@ -14,6 +17,15 @@ public:
     float x,y;
     int velocity_x,velocity_y;
     int radius;
+
+    Ball() {
+        x = screenWidth / 2;
+        y = screenHeight / 2;
+        velocity_x = 7;
+        velocity_y = 7;
+        radius = 20;
+    }
+
     void DrawBall() {
         DrawCircle(x, y, radius, Orange);
     }

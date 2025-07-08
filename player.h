@@ -21,6 +21,15 @@ public:
     float x,y;
     float width,height;
     int velocity;
+
+    Player() {
+        x = 10;
+        y = screenHeight / 2  - 60;
+        width = 25;
+        height = 120;
+        velocity = 6;
+    }
+
     void Draw() {
         DrawRectangle(x, y, width, height, RAYWHITE);
     }
