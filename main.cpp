@@ -1,44 +1,15 @@
 #include <iostream>
 #include "raylib.h"
+#include "ball.h"
 
-int player_score = 0;
-int computer_score = 0;
+int player_score_val = 0;
+int computer_score_val = 0;
+int *player_score = &player_score_val;
+int *computer_score = &computer_score_val;
 
-Color Orange = Color{255,165,0, 254};
 Color LightGreen = Color{46, 204, 113, 255};
 Color Caledonian = Color{130, 224, 170, 255};
 Color AquaMarine = Color{88, 214, 141, 255};
-
-class Ball {
-public:
-    float x,y;
-    int velocity_x,velocity_y;
-    int radius;
-void DrawBall() {
-    DrawCircle(x, y, radius, Orange);
-}
-void UpdatePosition() {
-    x += velocity_x;
-    y += velocity_y;
-    if (y + radius >= GetScreenHeight() || y - radius <= 0) {
-        velocity_y *= -1;
-    }
-    if (x + radius >= GetScreenWidth()) {
-        computer_score++;
-        ResetPosition();
-    } else if (x + radius <= 0) {
-               player_score++;
-               ResetPosition();
-            }
-}
-void ResetPosition() {
-    x = GetScreenWidth() / 2;
-    y = GetScreenHeight() / 2;
-    int direction[2]={-1,1};
-    velocity_x *= direction[GetRandomValue(0, 1)];
-    velocity_y *= direction[GetRandomValue(0, 1)];
-}
-};
 
 class Player {
 protected:
@@ -120,7 +91,7 @@ int main(void)
     {
         BeginDrawing();
 
-        ball.UpdatePosition();
+        ball.UpdatePosition(computer_score, player_score);
         player.Move();
         computer.ComputerMove(ball.y);
 
@@ -140,8 +111,8 @@ int main(void)
         ball.DrawBall();
         player.Draw();
         computer.Draw();
-        DrawText(TextFormat("%i", player_score), 3 * screenWidth / 4 - 20, 20, 80, RAYWHITE);
-        DrawText(TextFormat("%i", computer_score), screenWidth / 4 - 20, 20, 80, RAYWHITE);
+        DrawText(TextFormat("%i", *player_score), 3 * screenWidth / 4 - 20, 20, 80, RAYWHITE);
+        DrawText(TextFormat("%i", *computer_score), screenWidth / 4 - 20, 20, 80, RAYWHITE);
 
         EndDrawing();
 
