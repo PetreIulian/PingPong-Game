@@ -1,6 +1,8 @@
 #include <iostream>
 #include "raylib.h"
 #include "ball.h"
+#include "player.h"
+#include "computer.h"
 
 int player_score_val = 0;
 int computer_score_val = 0;
@@ -11,52 +13,6 @@ Color LightGreen = Color{46, 204, 113, 255};
 Color Caledonian = Color{130, 224, 170, 255};
 Color AquaMarine = Color{88, 214, 141, 255};
 
-class Player {
-protected:
-void LimitMovement() {
-    if (y <= 0) {
-        y = 5;
-    }
-    if (y + height >= GetScreenHeight()) {
-        y = GetScreenHeight() - height - 5;
-    }
-}
-public:
-    float x,y;
-    float width,height;
-    int velocity;
-void Draw() {
-    DrawRectangle(x, y, width, height, RAYWHITE);
-}
-void Move() {
-    if (IsKeyDown(KEY_UP)) {
-        y = y - velocity;
-    }
-    if (IsKeyDown(KEY_DOWN)) {
-        y = y + velocity;
-    }
-    if (y <= 0) {
-        y = 5;
-    }
-    if (y + height >= GetScreenHeight()) {
-        y = GetScreenHeight() - height - 5;
-    }
-    LimitMovement();
-}
-};
-
-class Computer: public Player {
-public:
-void ComputerMove(int ball_y) {
-    if (y + height / 2 > ball_y) {
-        y -= velocity;
-    }
-    if (y + height / 2 <= ball_y) {
-        y += velocity;
-    }
-    LimitMovement();
-}
-};
 
 Ball ball;
 Player player;
